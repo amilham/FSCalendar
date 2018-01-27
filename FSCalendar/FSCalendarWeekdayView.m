@@ -73,7 +73,8 @@
     for (NSInteger i = 0; i < count; i++) {
         CGFloat width = widths[i];
         UILabel *label = [self.weekdayPointers pointerAtIndex:i];
-        label.frame = CGRectMake(x, 0, width, self.contentView.fs_height);
+        [label sizeToFit];
+        label.frame = CGRectMake(x, self.contentView.fs_height - label.frame.size.height, width, label.frame.size.height);
         x += width;
     }
     free(widths);
@@ -103,7 +104,8 @@
         label.textColor = self.calendar.appearance.weekdayTextColor;
         label.text = useDefaultWeekdayCase ? weekdaySymbols[index] : [weekdaySymbols[index] uppercaseString];
     }
-
+    
 }
 
 @end
+
